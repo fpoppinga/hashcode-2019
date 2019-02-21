@@ -10,10 +10,13 @@ class Piece:
         self.y2 = y2
 
     def area(self):
-        return abs(self.x2 - self.x1 + 1) * abs(self.y2 - self.y1 + 1)
+        return (abs(self.x2 - self.x1) + 1) * (abs(self.y2 - self.y1) + 1)
+
+    def cut(self, pizza):
+        return pizza[self.y1:(self.y2 + 1), self.x1:(self.x2 + 1)]
 
     def __str__(self):
-        return "{} {} {} {}".format(self.x1, self.y1, self.x2, self.y2, self.area())
+        return "{} {} {} {}".format(self.y1, self.x1, self.y2, self.x2, self.area())
 
 
 class Solution:
