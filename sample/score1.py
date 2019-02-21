@@ -71,8 +71,8 @@ def solve(problem: Problem) -> Solution:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--problem", default="in/c_medium.in")
-    parser.add_argument("--solution", default="out/c_medium.out")
+    parser.add_argument("--problem", default="in/d_big.in")
+    parser.add_argument("--solution", default="out/d_big.out")
     args = parser.parse_args()
 
     p = Problem(args.problem)
