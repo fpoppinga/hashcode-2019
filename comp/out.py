@@ -1,5 +1,4 @@
 class Solution:
-
     def __init__(self, slides):
         self.slides = slides
 
