@@ -59,6 +59,11 @@ class Slide:
         self.photo1 = photo1
         self.photo2 = photo2
 
+    def photos(self):
+        if self.photo2 is None:
+            return [self.photo1]
+        return [self.photo1, self.photo2]
+
     def __str__(self):
         if self.photo2:
             return "{} {}".format(self.photo1.id, self.photo2.id)
