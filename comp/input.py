@@ -10,6 +10,7 @@ class Photo:
     def __str__(self):
         return "id: {}, {}, [{}]".format(self.id, self.is_vertical, self.tags)
 
+
 class Problem:
     def __init__(self, path):
         self.photos = []
