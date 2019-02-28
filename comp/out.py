@@ -1,3 +1,6 @@
+from comp.input import Photo
+
+
 class Solution:
     def __init__(self, slides):
         self.slides = slides
@@ -23,22 +26,24 @@ class Solution:
                 if len(splitted) > 2:
                     raise Exception("More than two pieces in line {}: {}".format(row_num, line))
                 elif len(splitted) == 2:
-                    slides.append(Slide(int(splitted[0]), int(splitted[1])))
+                    photo1 = Photo(int(splitted[0], True, []))
+                    photo2 = Photo(int(splitted[1], True, []))
+                    slides.append(photo1, photo2)
                 elif len(splitted) == 1:
-                    slides.append(Slide(int(splitted[0])))
+                    slides.append(Slide(Photo(int(splitted[0]), False, [])))
         return Solution(slides)
 
 
 class Slide:
-    def __init__(self, id1, id2=None):
-        self.id1 = id1
-        self.id2 = id2
+    def __init__(self, photo1: Photo, photo2=None):
+        self.photo1 = photo1
+        self.photo2 = photo2
 
     def __str__(self):
-        if self.id2:
-            return "{} {}".format(self.id1, self.id2)
+        if self.photo2:
+            return "{} {}".format(self.photo1.id, self.photo2.id)
         else:
-            return "{}".format(self.id1)
+            return "{}".format(self.photo1.id)
 
 
 if __name__ == "__main__":
