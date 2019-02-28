@@ -46,6 +46,7 @@ def index(p: Problem) -> Solution:
                 vertical = photo
             else:
                 slides.append(Slide(vertical, photo))
+                vertical = None
             continue
 
         slides.append(Slide(photo))
