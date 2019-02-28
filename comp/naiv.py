@@ -21,10 +21,15 @@ class Node:
         current.slides.append(slide)
 
     def walk(self):
-        yield from self.slides
-
+        idx = 0
         for t in sorted(self.children):
-            yield from self.children[t].walk()
+            for c in self.children[t].walk():
+                if idx < len(self.slides):
+                    yield self.slides[idx]
+                yield c
+                idx += 1
+
+        yield from self.slides[idx:]
 
 
 def index(p: Problem) -> Solution:
