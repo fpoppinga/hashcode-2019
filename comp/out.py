@@ -47,6 +47,15 @@ class Solution:
 
 class Slide:
     def __init__(self, photo1: Photo, photo2=None):
+        if photo1.is_vertical:
+            if photo2 == None:
+                raise Exception("Cannot create slide with single vertical photo: {}".format(photo1))
+            elif not photo2.is_vertical:
+                raise Exception("Tried to use a vertical photo with a horizontal one: ({},{})".format(photo1, photo2))
+        else:
+            if photo2 != None:
+                raise Exception("Cannot use a horizontal photo in a pair: ({},{})".format(photo1, photo2))
+
         self.photo1 = photo1
         self.photo2 = photo2
 
