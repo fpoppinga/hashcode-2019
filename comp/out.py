@@ -37,9 +37,9 @@ class Solution:
                 if len(splitted) > 2:
                     raise Exception("More than two pieces in line {}: {}".format(row_num, line))
                 elif len(splitted) == 2:
-                    photo1 = Photo(int(splitted[0], True, []))
-                    photo2 = Photo(int(splitted[1], True, []))
-                    slides.append(photo1, photo2)
+                    photo1 = Photo(int(splitted[0]), True, [])
+                    photo2 = Photo(int(splitted[1]), True, [])
+                    slides.append(Slide(photo1, photo2))
                 elif len(splitted) == 1:
                     slides.append(Slide(Photo(int(splitted[0]), False, [])))
         return Solution(slides)

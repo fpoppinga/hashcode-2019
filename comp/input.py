@@ -13,14 +13,14 @@ class Photo:
 
 class Problem:
     def __init__(self, path):
-        self.photos = []
+        self.photos = {}
         with open(path, "r") as f:
             count = int(f.readline())
 
             id = 0
             while id < count:
                 [orientation, tag_count, *tags] = f.readline().split()
-                self.photos.append(Photo(id, orientation == "V", tags))
+                self.photos[id] = Photo(id, orientation == "V", set(tags))
                 id += 1
 
 
@@ -29,5 +29,5 @@ if __name__ == "__main__":
         for file in files:
             p = Problem(dirpath + "/" + file)
 
-            for photo in p.photos:
+            for id, photo in p.photos.items():
                 print(photo)
