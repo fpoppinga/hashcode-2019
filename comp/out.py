@@ -1,4 +1,15 @@
 from comp.input import Photo
+import zipfile
+import os
+
+
+def zipdir(path, ziph):
+    # ziph is zipfile handle
+    zipf = zipfile.ZipFile(ziph, 'w', zipfile.ZIP_DEFLATED)
+    for root, dirs, files in os.walk(path):
+        for file in files:
+            if file.endswith(".py"):
+                zipf.write(os.path.join(root, file))
 
 
 class Solution:
