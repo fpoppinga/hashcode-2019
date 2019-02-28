@@ -6,11 +6,11 @@ from comp.score import score_of_interest, score, join_tags
 class Node:
     def __init__(self, tag):
         self.tag = tag
-        self.slides = []
+        self.photos = []
         self.children = {}
 
-    def insert(self, slide):
-        tags = sorted(join_tags(slide.photo1, slide.photo2))
+    def insert(self, photo):
+        tags = sorted(photo.tags)
         current = self
         for t in tags:
             if t not in current.children:
@@ -18,37 +18,39 @@ class Node:
 
             current = current.children[t]
 
-        current.slides.append(slide)
+        current.photos.append(photo)
 
     def walk(self):
         idx = 0
         for t in sorted(self.children):
             for c in self.children[t].walk():
-                if idx < len(self.slides):
-                    yield self.slides[idx]
+                if idx < len(self.photos):
+                    yield self.photos[idx]
                 yield c
                 idx += 1
 
-        yield from self.slides[idx:]
+        yield from self.photos[idx:]
 
 
 def index(p: Problem) -> Solution:
     root = Node("")
 
-    vertical = None
     for id, photo in p.photos.items():
+        root.insert(photo)
+
+    vertical = None
+    slides = []
+    for photo in root.walk():
         if photo.is_vertical:
             if vertical is None:
                 vertical = photo
             else:
-                root.insert(Slide(photo, vertical))
-                vertical = None
-
+                slides.append(Slide(vertical, photo))
             continue
 
-        root.insert(Slide(photo))
+        slides.append(Slide(photo))
 
-    return Solution(list(root.walk()))
+    return Solution(slides)
 
 
 def naiv(problem: Problem) -> Solution:
