@@ -45,7 +45,16 @@ def index(p: Problem) -> Solution:
             if vertical is None:
                 vertical = photo
             else:
-                slides.append(Slide(vertical, photo))
+                t1 = vertical.tags
+                t2 = photo.tags
+
+                common_tags = len(t1.intersection(t2))
+                d1 = len(t1.difference(t2))
+                d2 = len(t2.difference(t1))
+
+                if common_tags > min(d1, d2):
+                    slides.append(Slide(vertical, photo))
+
                 vertical = None
             continue
 
